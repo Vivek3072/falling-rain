@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const Grid = ({ start, snakeColour }) => {
+const Grid = ({ start, rainColour }) => {
   const rows = 15;
   const cols = 10;
-  const snakeLength = 5;
+  const rainLength = 5;
 
-  // Initialize snake with the starting position
-  const [snake, setSnake] = useState(
-    Array(snakeLength)
+  // Initialize rain with the starting position
+  const [rain, setrain] = useState(
+    Array(rainLength)
       .fill(0)
       .map((_, idx) => (start + idx) % rows)
   );
@@ -17,31 +17,31 @@ const Grid = ({ start, snakeColour }) => {
   );
 
   useEffect(() => {
-    if (start === -1) return; // No snake for this column
+    if (start === -1) return; // No rain for this column
 
     const interval = setInterval(() => {
       setGrid((prevGrid) => {
         const newGrid = prevGrid.map((row) => row.slice());
 
-        // Clear previous snake position
-        snake.forEach((row) => {
+        // Clear previous rain position
+        rain.forEach((row) => {
           newGrid[row][0] = null;
         });
 
-        // Move snake down
-        const newSnake = snake.map((row) => (row + 1) % rows);
+        // Move rain down
+        const newrain = rain.map((row) => (row + 1) % rows);
 
-        newSnake.forEach((row) => {
-          newGrid[row][0] = snakeColour;
+        newrain.forEach((row) => {
+          newGrid[row][0] = rainColour;
         });
 
-        setSnake(newSnake);
+        setrain(newrain);
         return newGrid;
       });
     }, 30);
 
     return () => clearInterval(interval);
-  }, [snake, start, snakeColour]);
+  }, [rain, start, rainColour]);
 
   return (
     <div className="grid grid-cols-1 gap-1">
