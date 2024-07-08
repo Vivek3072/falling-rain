@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import Grid from "./Grid";
 
@@ -13,7 +13,7 @@ const getRandomColor = () => {
 
 function App() {
   const startPos = [
-    1, -1, -1, 6, 0, -1, 4, 2, -1, -1, 8, 7, -1, -1, -1, 1, 7, 0, -1, 3,
+    1, -1, -1, 6, 0, -1, 4, 2, -1, -1, 8, -1, 5, -1, -1, 1, 7, 0, -1, 3,
   ];
 
   const [snakeColour, setSnakeColour] = useState(getRandomColor());
@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setSnakeColour(getRandomColor());
-    }, 1500);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
